@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="Examples" exporter="Flowable Open Source Modeler" exporterVersion="6.7.2">
+  <process id="signup-process:1:ecf59b5a-ab8d-11ec-95f8-02216be36b79" name="signup-process:1:ecf59b5a-ab8d-11ec-95f8-02216be36b79" isExecutable="true">
+    <startEvent id="start" flowable:initiator="initiator" flowable:formFieldValidation="true"></startEvent>
+    <sequenceFlow id="sequenceFlow-cf08d5e9-2ccf-45b1-88a5-2f8ddb613ee3" sourceRef="start" targetRef="9186c483-aba3-11ec-aaf5-02216be36b79"></sequenceFlow>
+    <userTask id="9186c483-aba3-11ec-aaf5-02216be36b79" name="confirm-email-task" flowable:assignee="${initiator}" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sequenceFlow-7c841300-90dd-4dd1-ba30-ed4a76c1eeb9" sourceRef="confirm-email-task" targetRef="send-welcome-email-task"></sequenceFlow>
+    <serviceTask id="send-welcome-email-task" flowable:expression="#{emailService.sendWelcomeEmail(customerId,email)}"></serviceTask>
+    <sequenceFlow id="sequenceFlow-77a946e0-3da3-4971-bec4-ce6c4b6ef272" sourceRef="send-welcome-email-task" targetRef="end"></sequenceFlow>
+    <endEvent id="end"></endEvent>
+  </process>
+</definitions>
